@@ -4,10 +4,10 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-require('./app_server/models/db');
+require('./app_api/Models/db');
 
 const index = require('./app_server/routes/index');
-
+const apiRoutes = require('./app_api/routes/indexApi'); //new routes for the API
 
 var app = express();
 
@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/api', apiRoutes); //all API routes will start with '/api'
 
 
 // catch 404 and forward to error handler
