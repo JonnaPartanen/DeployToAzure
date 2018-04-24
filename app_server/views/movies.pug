@@ -4,5 +4,6 @@ block content
     h1='My favourite Movies'
     ul
         each movie in movies
-            li= movie.movie + ' , '+ movie.director
+            li= 'Movie name: '+movie.movie + '   , director: '+ movie.director
+    a(href='/movies/add') Add new Movie
 

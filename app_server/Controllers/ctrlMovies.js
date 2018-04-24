@@ -1,6 +1,38 @@
 const request = require('request'); //require the request module and the apiURLs file
 const apiURL = require('./apiURLs');
 
+const showForm = function(req, res){
+    res.render('movies_add');
+};
+
+const addData = function(req, res){
+    const path = '/api/movies';
+
+    const postdata = {
+        movie: req.body.movie,
+        director: req.body.director
+    };
+
+    const requestOptions = {
+        url : apiURL.server + path,
+        method : 'POST',
+        json : postdata
+    };
+
+    request(
+        requestOptions,
+        function (err, response){
+            if (response.statusCode === 201){
+                res.redirect('/movies');
+            }else{
+                res.render('error', {message: 'Error adding data: '+
+                response.statusMessage +
+                ' ('+ response.statusCode + ')'});
+            }
+        }
+    );
+};
+
 const list = function(req, res){
 
     const path = '/api/movies';
@@ -30,5 +62,7 @@ const list = function(req, res){
 };
 
 module.exports = {
-    list
+    list,
+    showForm,
+    addData
 };

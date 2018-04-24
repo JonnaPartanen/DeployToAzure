@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    .row
+        h4 Add some good movie
+    form(action="", method="post")
+        .form-group.row
+            label Movie
+                input.form-control(name="movie")
+        .form-group.row
+            label Director
+                input.form-control(name="director")
+        .form-group.row
+            button.btn-primary Add

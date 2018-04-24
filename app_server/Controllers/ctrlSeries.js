@@ -1,6 +1,38 @@
 const request = require('request'); //require the request module and the apiURLs file
 const apiURL = require('./apiURLs');
 
+const showForm = function(req, res){
+    res.render('series_add');
+};
+
+const addData = function(req, res){
+    const path = '/api/series';
+
+    const postdata = {
+        serie: req.body.serie,
+
+    };
+
+    const requestOptions = {
+        url : apiURL.server + path,
+        method : 'POST',
+        json : postdata
+    };
+
+    request(
+        requestOptions,
+        function (err, response){
+            if (response.statusCode === 201){
+                res.redirect('/series');
+            }else{
+                res.render('error', {message: 'Error adding data: ' +
+                response.statusMessage +
+                ' ('+ response.statusCode + ')'});
+            }
+        }
+    );
+};
+
 const list = function(req, res){
     const path = '/api/series';
     const requestOptions = {
@@ -28,5 +60,7 @@ const list = function(req, res){
     );
 };
 module.exports = {
-    list
+    list,
+    showForm,
+    addData
 };
