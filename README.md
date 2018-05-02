@@ -1,4 +1,4 @@
-Simple Node.js server for testing purposes
+
 
 Home Page:
 
